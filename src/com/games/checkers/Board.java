@@ -1,28 +1,43 @@
 package com.games.checkers;
 
-import java.awt.*;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 
 public class Board {
-    public static final int rows = 8;
-    public static final int columns = 8;
+    /* static final integers for new Board creation
+     * The standard checkers board size is 8x8, referenced in rows/columns vars.
+     * size
+     */
+
     public int size;
+    public CheckerPiece[][] checkersArray;
 
 
-    public Pieces[][] board;
+    public Board(int size) {
+        this.checkersArray = new CheckerPiece[size][size];
+        this.size = size;
 
-    public Board () {
-        this.board = new Pieces[rows][columns];
-
+        setupBoard();
     }
 
-    public Pieces[][] getBoard() {
-        return board;
+
+    public void setupBoard() {
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                if (y < 3 && isValidBoardSpace(x, y)) {
+                    this.checkersArray[y][x] = new CheckerPiece(x, y, true);
+                }
+
+                else if ( y >= size - 3 && isValidBoardSpace(x,y))
+                {
+                    this.checkersArray[y][x] = new CheckerPiece(x,y, false);
+                }
+            }
+        }
     }
 
-    private class Pieces {
+
+    public boolean isValidBoardSpace (int x, int y) {
+        return x % 2 == y % 2;
     }
+
+
 }

@@ -1,5 +1,7 @@
 package com.games.checkers;
 
-class CheckerPiece {
+public class CheckerPiece {
 
-}
+        public CheckerPiece(int x, int y, boolean b) {
+        }
+    }
