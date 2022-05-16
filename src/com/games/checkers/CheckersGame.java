@@ -1,4 +1,5 @@
 package com.games.checkers;
 
-enum PieceColor {
+class CheckersGame {
+
 }
