@@ -57,7 +57,7 @@ public class Board {
         return this.checkersArray[y][x];
     }
 
-    // Method to set a CheckerPiece object's location to the given coordinates
+    // Method to set a CheckerPiece object's x,y coordinates to the given coordinates.
     private void setLocationValue(int x, int y, CheckerPiece piece) {
         this.checkersArray[y][x] = piece;
     }

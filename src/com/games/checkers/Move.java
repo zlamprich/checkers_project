@@ -57,6 +57,7 @@ public class Move {
             if (previousMove != null) {
                 pieces.addAll(Arrays.asList(previousMove.getJumpedPieces(board)));
             }
+            //Trim array results
             pieces.trimToSize();
             return pieces.toArray(new CheckerPiece[1]);
         }
