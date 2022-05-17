@@ -48,9 +48,18 @@ public class Board {
     // isValidBoardSpace method to check if given board space is a black space usable by CheckerPiece. Standard checkerboards begin with white square in top left corner,
     // with int x, and int y acting as coordinates for each space.
     public boolean isValidBoardSpace (int x, int y) {
-
         // check for black space by checking if x returns an even integer when in an even row, or an odd integer when in an odd row.
         return x % 2 == y % 2;
+    }
+
+    // Method to get the x,y coordinates of a particular CheckerPiece object, then return the piece or null if empty.
+    public CheckerPiece getLocationValue(int x, int y) {
+        return this.checkersArray[y][x];
+    }
+
+    // Method to set a CheckerPiece object's x,y coordinates to the given coordinates.
+    private void setLocationValue(int x, int y, CheckerPiece piece) {
+        this.checkersArray[y][x] = piece;
     }
 
 
