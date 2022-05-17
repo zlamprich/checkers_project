@@ -14,8 +14,4 @@ class Player {
         System.out.println("Player 2: Please enter your name");
         String P2 = scanner.nextLine();
         }
-
-    public static void main(String[] args) {
-        Players();
-    }
 }
