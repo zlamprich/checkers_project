@@ -4,7 +4,6 @@ package com.games.checkers;
 public class Board {
     /* static final integers for new Board creation
      * The standard checkers board size is 8x8, referenced in rows/columns vars.
-     *
      */
 
     public int size;
