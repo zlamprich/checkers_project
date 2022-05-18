@@ -81,35 +81,65 @@ public class Board {
         //check up moves
         if (pieceY + 1 < boardYBound) {
             //check right moves if black piece or kinged piece
-            if (pieceX + 1 < boardXBound && (isBlack||thePieceToCheck.getIsKingPiece())) {
+            if (pieceX + 1 < boardXBound && (isBlack || thePieceToCheck.getIsKingPiece())) {
                 if (checkersArray[pieceY + 1][pieceX + 1] == null) validMoves.add(upRightMove);
-                if (checkersArray[pieceY + 1][pieceX + 1] != null) ; //ADD JUMP LOGIC
+                if (checkersArray[pieceY + 1][pieceX + 1] != null && validJumpCheckHelper(thePieceToCheck.getPieceLocation(),new Point(pieceX+1,pieceY+1))){
+                    validMoves.add(new Point(pieceX+2,pieceY+2));
+                }; //ADD JUMP LOGIC
             }
             //check left moves
             if (pieceX - 1 >= 0) {
                 if (checkersArray[pieceY + 1][pieceX - 1] == null) validMoves.add(upLeftMove);
-                if (checkersArray[pieceY + 1][pieceX - 1] != null) ; //ADD JUMP LOGIC
+                if (checkersArray[pieceY + 1][pieceX - 1] != null && validJumpCheckHelper(thePieceToCheck.getPieceLocation(), new Point(pieceX - 1, pieceY + 1))) {
+                    validMoves.add(new Point(pieceX - 2, pieceY + 2));
+                }
+                ; //ADD JUMP LOGIC
             }
 
         }
         //check down moves if it is white piece or kinged piece
-        if (pieceY - 1 >= 0 && (!isBlack||thePieceToCheck.getIsKingPiece())) {
+        if (pieceY - 1 >= 0 && (!isBlack || thePieceToCheck.getIsKingPiece())) {
             //check right moves
             if (pieceX + 1 < boardXBound) {
 
                 if (checkersArray[pieceY - 1][pieceX + 1] == null) validMoves.add(downRightMove);
-                if (checkersArray[pieceY - 1][pieceX + 1] != null);//ADD JUMP LOGIC
+                if (checkersArray[pieceY - 1][pieceX + 1] != null && validJumpCheckHelper(thePieceToCheck.getPieceLocation(), new Point(pieceX + 1, pieceY - 1))) {
+                    validMoves.add(new Point(pieceX + 2, pieceY - 2));
+                }
+                ;//ADD JUMP LOGIC
             }
             //check left moves
             if (pieceX - 1 >= 0) {
                 if (checkersArray[pieceY - 1][pieceX - 1] == null) validMoves.add(downLeftMove);
-                if (checkersArray[pieceY - 1][pieceX - 1] != null);//ADD JUMP LOGIC
+                //found another piece use helper to check if can jump then add the jump location
+                if (checkersArray[pieceY - 1][pieceX - 1] != null && validJumpCheckHelper(thePieceToCheck.getPieceLocation(), new Point(pieceX - 1, pieceY - 1))) {
+                    validMoves.add(new Point(pieceX - 2, pieceY - 2));
+                }
             }
 
         }
 
 
         return validMoves;
+    }
+
+    private boolean validJumpCheckHelper(Point thePointToJumpFrom, Point thePointToJumpOver) {
+        boolean solution = false;
+
+        //check to make sure pieces at the points are not the same color
+        if (checkersArray[(int) thePointToJumpFrom.getY()][(int) thePointToJumpFrom.getX()].getIsBlack() && !checkersArray[(int) thePointToJumpOver.getY()][(int) thePointToJumpOver.getX()].getIsBlack()) {
+            int xDirection = (int) thePointToJumpOver.getX() - (int) thePointToJumpFrom.getX();
+            int yDirection = (int) thePointToJumpOver.getY() - (int) thePointToJumpFrom.getY();
+            //check to make sure the piece after thePointToJumpOver is within bounds and empty
+            if ((int) thePointToJumpOver.getX() + xDirection < checkersArray.length && (int) thePointToJumpOver.getX() + xDirection >= 0
+                    && (int) thePointToJumpOver.getY() + yDirection < checkersArray[0].length && (int) thePointToJumpOver.getY() + yDirection >= 0
+                    && checkersArray[(int) thePointToJumpOver.getY() + yDirection][(int) thePointToJumpOver.getX() + xDirection] == null) {
+                solution = true;
+            }
+        }
+
+
+        return solution;
     }
 
 
