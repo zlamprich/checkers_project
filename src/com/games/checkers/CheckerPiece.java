@@ -26,15 +26,15 @@ public class CheckerPiece {
 
     //method to get the location of a given piece on the board, returned as an array of X, Y coordinates.
     public Point getPieceLocation() {
-        return this.pieceCordinates;
+        return  this.pieceCordinates;
     }
 
     //method to check if king
-    public boolean getisKingPiece() {
+    public boolean getIsKingPiece() {
         return this.isKingPiece;
     }
 
-    public boolean getisBlack() {
+    public boolean getIsBlack() {
         return this.isBlack;
     }
 
@@ -46,7 +46,7 @@ public class CheckerPiece {
 
     //method to CHECK if piece is a King piece after reaching the end of the board. Ran after every move.
     public void checkKingStatus(Board board) {
-        if (isBlack && pieceCordinates.getY() == board.size - 1 || !isBlack && pieceCordinates.getY() == 0)
+        if (getIsBlack() && pieceCordinates.getY() == board.size - 1 || !getIsBlack() && pieceCordinates.getY() == 0)
             this.setAsKing();
     }
 
