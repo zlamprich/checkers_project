@@ -3,8 +3,10 @@ package com.games.checkers;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.apps.util.Prompter;
+import java.util.Scanner;
 
-class CheckersGame {
+class CheckersGame extends Board {
 
     public static void main(String[] args) {
         Board gameBoard = new Board();
@@ -17,7 +19,24 @@ class CheckersGame {
 
         System.out.println("hi");
 
+
+
+
+
+        Prompter prompter = new Prompter(new Scanner(System.in));
+        String name = prompter.prompt("Please enter your name: ");
+        String color = prompter.prompt("Please enter your piece color: ");
+
+
+
+
+        Player Player1 = new Player(name, color);
+        System.out.println("Player 1 is: " + Player1);
+
+
     }
+
+
 
 }
 
