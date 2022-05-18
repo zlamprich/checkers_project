@@ -7,7 +7,7 @@ import java.util.List;
 class CheckersGame {
 
     public static void main(String[] args) {
-        Board gameBoard = new Board(8);
+        Board gameBoard = new Board();
         List<Point> validStuff = gameBoard.checkValidMove(gameBoard.getCheckersArray()[2][0]);
         System.out.println(validStuff.toString());
         gameBoard.movePiece(gameBoard.getCheckersArray()[2][0],new Point(1,3));

@@ -24,11 +24,9 @@ public class Board {
      * initialization.
      */
 
-    public Board(int size) {
-
+    public Board() {
+        this.size = 8;
         this.checkersArray = new CheckerPiece[size][size];
-        this.size = size;
-
         setupBoard();
     }
 
