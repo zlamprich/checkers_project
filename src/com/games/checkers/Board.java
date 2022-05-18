@@ -143,8 +143,31 @@ public class Board {
             }
         }
 
-
         return solution;
+    }
+
+    public void movePiece(CheckerPiece thePiece, Point thePoint) {
+        List<Point> validMoves = checkValidMove(thePiece);
+        //make int copies for readability
+        int currentPieceX = (int) thePiece.getPieceLocation().getX();
+        int currentPieceY = (int) thePiece.getPieceLocation().getY();
+        int pointX = (int) thePoint.getX();
+        int pointY = (int) thePoint.getY();
+        //check if intended move is valid
+        if (validMoves.contains(thePoint)) {
+            //check if moving is a jump
+            if (pointX - currentPieceX == 2 || pointX - currentPieceX == -2) {
+                checkersArray[(currentPieceY+pointY)/2][(currentPieceX+pointX)/2]=null;
+            }
+
+            //move the piece
+            checkersArray[pointY][pointX]=thePiece;
+            //update piece data
+            thePiece.getPieceLocation().setLocation(pointX,pointY);
+            //delete old piece
+            checkersArray[currentPieceY][currentPieceX]=null;
+
+        }
     }
 
 
