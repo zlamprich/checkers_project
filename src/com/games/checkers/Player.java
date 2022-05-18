@@ -42,7 +42,7 @@ public class Player extends Board{
         return color;
     }
 
-    
+
 
     @Override
     public String toString() {
