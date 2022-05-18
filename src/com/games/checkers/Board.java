@@ -64,6 +64,10 @@ public class Board {
         this.checkersArray[y][x] = piece;
     }
 
+    public CheckerPiece[][] getCheckersArray() {
+        return this.checkersArray;
+    }
+
     //checks a checker piece's valid moves
     public List<Point> checkValidMove(CheckerPiece thePieceToCheck) {
         List<Point> validMoves = new ArrayList<>();
@@ -79,13 +83,14 @@ public class Board {
         Point downRightMove = new Point(pieceX + 1, pieceY - 1);
 
         //check up moves
-        if (pieceY + 1 < boardYBound) {
+        if (pieceY + 1 < boardYBound && (isBlack || thePieceToCheck.getIsKingPiece())) {
             //check right moves if black piece or kinged piece
-            if (pieceX + 1 < boardXBound && (isBlack || thePieceToCheck.getIsKingPiece())) {
+            if (pieceX + 1 < boardXBound) {
                 if (checkersArray[pieceY + 1][pieceX + 1] == null) validMoves.add(upRightMove);
-                if (checkersArray[pieceY + 1][pieceX + 1] != null && validJumpCheckHelper(thePieceToCheck.getPieceLocation(),new Point(pieceX+1,pieceY+1))){
-                    validMoves.add(new Point(pieceX+2,pieceY+2));
-                }; //ADD JUMP LOGIC
+                if (checkersArray[pieceY + 1][pieceX + 1] != null && validJumpCheckHelper(thePieceToCheck.getPieceLocation(), new Point(pieceX + 1, pieceY + 1))) {
+                    validMoves.add(new Point(pieceX + 2, pieceY + 2));
+                }
+                ; //ADD JUMP LOGIC
             }
             //check left moves
             if (pieceX - 1 >= 0) {

@@ -21,7 +21,7 @@ public class CheckerPiece {
      */
     public CheckerPiece(int x, int y, boolean b) {
         this.pieceCordinates = new Point(x, y);
-        this.isBlack = false;
+        this.isBlack = b;
     }
 
     //method to get the location of a given piece on the board, returned as an array of X, Y coordinates.
