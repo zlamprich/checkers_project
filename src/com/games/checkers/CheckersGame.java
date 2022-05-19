@@ -1,5 +1,7 @@
 package com.games.checkers;
 
+import com.apps.util.Prompter;
+
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,28 +9,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 class CheckersGame {
-
+    private static Board board;
+    private static Player player_1;
+    private static Player player_2;
     public static void main(String[] args) throws IOException {
-        Board gameBoard = new Board();
-        List<Point> validStuff = gameBoard.checkValidMove(gameBoard.getCheckersArray()[2][0]);
-        System.out.println(validStuff.toString());
-        gameBoard.movePiece(gameBoard.getCheckersArray()[2][0], new Point(1, 3));
-        List<Point> validStuff2 = gameBoard.checkValidMove(gameBoard.getCheckersArray()[3][1]);
-        gameBoard.movePiece(gameBoard.getCheckersArray()[3][1], new Point(2, 4));
-        List<Point> validStuff3 = gameBoard.checkValidMove(gameBoard.getCheckersArray()[5][3]);
-        gameBoard.movePiece(gameBoard.getCheckersArray()[5][3], new Point(1, 3));
-
-        System.out.println("hi");
-        Player p1 = new Player(gameBoard,true,"Worst Coder");
-        System.out.println(p1.toString());
-
-        // Printing the string
-        //System.out.print(str);
-        drawBoard(gameBoard.getCheckersArray());
-
+        promptWelcome();
+        startGame();
         System.out.println();
+
+    }
+    private static void promptWelcome() throws IOException {
+        Path rulesPath = Path.of("src/coms/games/resources/Rules");
+        String rulesString =Files.readString(rulesPath);
+        System.out.println(rulesString);
+    }
+    private static void startGame() throws IOException {
+        Prompter prompter =new Prompter(new Scanner(System.in));
+        String startGame =prompter.prompt("Start the game? y/n...  ","[yn]","Invalid Response please enter y or n");
+
+        board = new Board();
+        drawBoard(board.getCheckersArray());
 
     }
 

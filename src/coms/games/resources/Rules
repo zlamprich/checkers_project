@@ -1,0 +1,40 @@
+ __      __       .__                                   __                   .__                   __                          .__  .__  __
+/  \    /  \ ____ |  |   ____  ____   _____   ____    _/  |_  ____      ____ |  |__   ____   ____ |  | __ ___________  ______  |  | |__|/  |_  ____
+\   \/\/   // __ \|  | _/ ___\/  _ \ /     \_/ __ \   \   __\/  _ \   _/ ___\|  |  \_/ __ \_/ ___\|  |/ // __ \_  __ \/  ___/  |  | |  \   __\/ __ \
+ \        /\  ___/|  |_\  \__(  <_> )  Y Y  \  ___/    |  | (  <_> )  \  \___|   Y  \  ___/\  \___|    <\  ___/|  | \/\___ \   |  |_|  ||  | \  ___/
+  \__/\  /  \___  >____/\___  >____/|__|_|  /\___  >   |__|  \____/    \___  >___|  /\___  >\___  >__|_ \\___  >__|  /____  >  |____/__||__|  \___  >
+       \/       \/          \/            \/     \/                        \/     \/     \/     \/     \/    \/           \/                      \/
+                                                  __________      .__
+                                                  \______   \__ __|  |   ____   ______
+                                                   |       _/  |  \  | _/ __ \ /  ___/
+                                                   |    |   \  |  /  |_\  ___/ \___ \
+                                                   |____|_  /____/|____/\___  >____  >
+                                                          \/                \/     \/
+
+
+
+                                                    Checkers is played by two players.
+
+                                                Each player begins the game with 12 pieces.
+
+                                Player 1 opens the game, then players alternate their turns.
+
+                          The pieces always move diagonally and single pieces are always limited to forward moves.
+
+                                        A piece making a non-capturing move may move only one square.
+
+To capture a piece of your opponent, your piece leaps over one of the opponent's pieces and lands in a straight diagonal line on the other side. This landing square must be empty.
+
+                                             When a piece is captured, it is removed from the board.
+
+            Only one piece may be captured in a single jump, NO multiple jumps are allowed on a single turn in this implementation.
+
+                                     When a piece reaches the furthest row, it is crowned and becomes a king.
+
+                                Kings are limited to moving diagonally but can move both forward and backward.
+
+                                        A player wins the game when the opponent cannot make a move.
+
+     This happens usually because all of the opponent's pieces have been captured, but it could also be because all of his pieces are blocked in.
+
+
