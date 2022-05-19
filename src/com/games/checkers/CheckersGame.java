@@ -4,6 +4,7 @@ import com.apps.util.Prompter;
 
 import java.awt.*;
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,43 +12,77 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class CheckersGame {
+class CheckersGame{
     private static Board board;
     private static Player player_1;
     private static Player player_2;
+
     public static void main(String[] args) throws IOException {
+        //setup methods ran once
         promptWelcome();
         startGame();
+        setupPlayers();
+        //loop for game checking if either player has lost yet
+        while (player_1.thisPlayerLost()==false&&player_2.thisPlayerLost()==false){
+            //p1 move
+            //p2 move
+
+        }
+
         System.out.println();
 
     }
     private static void promptWelcome() throws IOException {
-        Path rulesPath = Path.of("src/coms/games/resources/Rules");
+        Path rulesPath = Path.of("src/com/games/resources/Rules");
         String rulesString =Files.readString(rulesPath);
         System.out.println(rulesString);
     }
     private static void startGame() throws IOException {
         Prompter prompter =new Prompter(new Scanner(System.in));
         String startGame =prompter.prompt("Start the game? y/n...  ","[yn]","Invalid Response please enter y or n");
+        if (startGame.equalsIgnoreCase("y")){
+            board = new Board();
+            drawBoard(board.getCheckersArray());
+        }
+        else {
+            System.out.println("continue reading rules...");
+            startGame();
+        }
 
-        board = new Board();
-        drawBoard(board.getCheckersArray());
-
+    }
+    private static void setupPlayers(){
+        Prompter prompter =new Prompter(new Scanner(System.in));
+        String setupPlayer1 =prompter.prompt("\u001B[36mPlayer 1\u001B[0m enter your name or leave blank for default");
+        if (setupPlayer1.isEmpty()){
+            player_1 = new Player(board,true);
+        }
+        else {
+            player_1 =new Player(board,true,setupPlayer1);
+        }
+        System.out.println(player_1.toString()+" has been created");
+        String setupPlayer2 = prompter.prompt("\u001B[91mPlayer 2\u001B[0m enter your name or leave blank for default");
+        if (setupPlayer2.isEmpty()){
+            player_2 = new Player(board,true);
+        }
+        else {
+            player_2 =new Player(board,false,setupPlayer2);
+        }
+        System.out.println(player_2.toString()+" has been created");
     }
 
     private static void drawBoard(CheckerPiece[][] theBoardArray) throws IOException {
-        Path bluePiece = Path.of("src/coms/games/resources/BlueSquare");
-        Path redPiece = Path.of("src/coms/games/resources/RedSquare");
-        Path emptySquarePath = Path.of("src/coms/games/resources/DefaultSquareEmpty");
-        Path filledSquarePath = Path.of("src/coms/games/resources/DefaultSquareFilled");
-        Path bottomRow = Path.of("src/coms/games/resources/bottomRowBoard");
+        Path bluePiece = Path.of("src/com/games/resources/BlueSquare");
+        Path redPiece = Path.of("src/com/games/resources/RedSquare");
+        Path emptySquarePath = Path.of("src/com/games/resources/DefaultSquareEmpty");
+        Path filledSquarePath = Path.of("src/com/games/resources/DefaultSquareFilled");
+        Path bottomRow = Path.of("src/com/games/resources/bottomRowBoard");
         int rowBoarderIndex = 0;
         Path currentRowBorder = Path.of("src/coms/games/resources/number_" + rowBoarderIndex);
         //draw board starting from top left corner lean on reference for placement
         for (int y = theBoardArray.length - 1; y >= 0; y--) {
             //change rowBorderIndex to reflect row
             rowBoarderIndex = y;
-            currentRowBorder = Path.of("src/coms/games/resources/number_" + rowBoarderIndex);
+            currentRowBorder = Path.of("src/com/games/resources/number_" + rowBoarderIndex);
 
             //Initialize Readers here
             //gross implementation but lets you reference correct line as you're going thru the loop multiple times
