@@ -72,12 +72,18 @@ public class Player {
             //iterate over player pieces checking if valid moves available for any of them
             for (CheckerPiece piece :
                     playerPieces) {
-                if (!board.checkValidMove(piece).isEmpty()) {
-                    aPieceCanMove = true;
-                    break;
-                }
 
+                try {
+                    if (piece != null && !board.checkValidMove(piece).isEmpty()) {
+                        aPieceCanMove = true;
+                        break;
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println(piece.toString());
+                }
             }
+
+
             //if iterated thru entire list and cannot move any piece player lost
             if (!aPieceCanMove) playerLost = true;
         }

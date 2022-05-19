@@ -24,11 +24,11 @@ class CheckersGame {
         setupPlayers();
         //loop for game checking if either player has lost yet
         boolean gameOver = false;
-        while (player_1.thisPlayerLost() == false && player_2.thisPlayerLost() == false) {
+        while (!gameOver) {
 
             //p1 move
             //check if player has lost before allowing them to move
-            if (player_1.thisPlayerLost() == false && !gameOver) {
+            if (player_1.thisPlayerLost() == false ) {
                 playerMove(player_1);
                 player_1.updateBoard(board);
             }
@@ -43,7 +43,7 @@ class CheckersGame {
             if (player_2.thisPlayerLost() == false && !gameOver) {
                 playerMove(player_2);
                 player_2.updateBoard(board);
-            } else {
+            } else if (!gameOver){
                 System.out.println(player_1.toString() + " wins!!!");
                 gameOver = true;
             }
