@@ -101,7 +101,7 @@ class CheckersGame {
     }
 
     private static void promptWelcome() throws IOException {
-        Path rulesPath = Path.of("C:\\AmazonSDE\\Git\\StudentWork\\MiniProject\\checkers_project\\resources\\Rules");
+        Path rulesPath = Path.of("resources/Rules");
         String rulesString = Files.readString(rulesPath);
         System.out.println(rulesString);
     }
@@ -139,18 +139,18 @@ class CheckersGame {
     }
 
     private static void drawBoard(CheckerPiece[][] theBoardArray) throws IOException {
-        Path bluePiece = Path.of("C:\\AmazonSDE\\Git\\StudentWork\\MiniProject\\checkers_project\\resources\\BlueSquare");
-        Path redPiece = Path.of("C:\\AmazonSDE\\Git\\StudentWork\\MiniProject\\checkers_project\\resources\\RedSquare");
-        Path emptySquarePath = Path.of("C:\\AmazonSDE\\Git\\StudentWork\\MiniProject\\checkers_project\\resources\\DefaultSquareEmpty");
-        Path filledSquarePath = Path.of("C:\\AmazonSDE\\Git\\StudentWork\\MiniProject\\checkers_project\\resources\\DefaultSquareFilled");
-        Path bottomRow = Path.of("C:\\AmazonSDE\\Git\\StudentWork\\MiniProject\\checkers_project\\resources\\bottomRowBoard");
+        Path bluePiece = Path.of("resources/BlueSquare");
+        Path redPiece = Path.of("resources/RedSquare");
+        Path emptySquarePath = Path.of("resources/DefaultSquareEmpty");
+        Path filledSquarePath = Path.of("resources/DefaultSquareFilled");
+        Path bottomRow = Path.of("resources/bottomRowBoard");
         int rowBoarderIndex = 0;
-        Path currentRowBorder = Path.of("C:\\AmazonSDE\\Git\\StudentWork\\MiniProject\\checkers_project\\resources\\number_" + rowBoarderIndex);
+        Path currentRowBorder = Path.of("resources/number_" + rowBoarderIndex);
         //draw board starting from top left corner lean on reference for placement
         for (int y = theBoardArray.length - 1; y >= 0; y--) {
             //change rowBorderIndex to reflect row
             rowBoarderIndex = y;
-            currentRowBorder = Path.of("C:\\AmazonSDE\\Git\\StudentWork\\MiniProject\\checkers_project\\resources\\number_" + rowBoarderIndex);
+            currentRowBorder = Path.of("resources/number_" + rowBoarderIndex);
 
             //Initialize Readers here
             //gross implementation but lets you reference correct line as you're going thru the loop multiple times
