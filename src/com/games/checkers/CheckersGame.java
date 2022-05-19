@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class CheckersGame{
+class CheckersGame {
     private static Board board;
     private static Player player_1;
     private static Player player_2;
@@ -23,51 +23,100 @@ class CheckersGame{
         startGame();
         setupPlayers();
         //loop for game checking if either player has lost yet
-        while (player_1.thisPlayerLost()==false&&player_2.thisPlayerLost()==false){
+        while (player_1.thisPlayerLost() == false && player_2.thisPlayerLost() == false) {
             //p1 move
+            playerMove(player_1);
             //p2 move
-
+            playerMove(player_2);
+            if (player_1.thisPlayerLost()) System.out.println(player_2.toString()+" wins!!!");
+            if (player_2.thisPlayerLost()) System.out.println(player_1.toString()+" wins!!!");
         }
 
         System.out.println();
 
     }
+
+    private static void playerMove(Player thePlayer) {
+        Prompter prompter = new Prompter(new Scanner(System.in));
+        String chooseCords = prompter.prompt(thePlayer.toString()+" choose py" +
+                "iece to move.Example row,column...0,0  ", "[0|1|2|3|4|5|6|7],[0|1|2|3|4|5|6|7]", "Invalid Response please enter in the digit form of row,column");
+        int xCord = Integer.parseInt(chooseCords.split(",")[0]);
+        int yCord = Integer.parseInt(chooseCords.split(",")[1]);
+        //check if piece exists and is the right player's piece
+        if (board.getLocationValue(xCord, yCord) != null && board.getLocationValue(xCord, yCord).getIsBlack() == thePlayer.isBlue()) {
+            //list available moves for valid piece
+            System.out.println("Selected piece can move in the following places ");
+            //loop thru avail move options
+            int counter = 0;
+            String regexCounter = "[";
+            //check if a valid move even exist
+            List<Point> availablePoints = board.checkValidMove(board.getLocationValue(xCord, yCord));
+            if (!availablePoints.isEmpty()) {
+                for (Point point :
+                        availablePoints) {
+                    System.out.println(counter + ". row = " + point.getY() + " column =" + point.x);
+                    regexCounter += counter + "|";
+                    counter++;
+                }
+                regexCounter = regexCounter.substring(0, regexCounter.length() - 1) + "]";
+            } else {
+                System.out.println("selected piece cannot move try again...");
+                playerMove(thePlayer);
+            }
+
+            //trim the end of the regexCounter
+
+            String validMoves = prompter.prompt("Enter number choice to move to.", regexCounter, "Invalid choice please choose one of the following digits" + regexCounter);
+            board.movePiece(board.getLocationValue(xCord, yCord), availablePoints.get(Integer.valueOf(validMoves)));
+            try {
+                drawBoard(board.getCheckersArray());
+            } catch (IOException e) {
+                System.out.println("failed to draw");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("not a valid piece selection try again....");
+            playerMove(thePlayer);
+        }
+
+
+    }
+
     private static void promptWelcome() throws IOException {
         Path rulesPath = Path.of("src/com/games/resources/Rules");
-        String rulesString =Files.readString(rulesPath);
+        String rulesString = Files.readString(rulesPath);
         System.out.println(rulesString);
     }
+
     private static void startGame() throws IOException {
-        Prompter prompter =new Prompter(new Scanner(System.in));
-        String startGame =prompter.prompt("Start the game? y/n...  ","[yn]","Invalid Response please enter y or n");
-        if (startGame.equalsIgnoreCase("y")){
+        Prompter prompter = new Prompter(new Scanner(System.in));
+        String startGame = prompter.prompt("Start the game? y/n...  ", "[yn]", "Invalid Response please enter y or n");
+        if (startGame.equalsIgnoreCase("y")) {
             board = new Board();
             drawBoard(board.getCheckersArray());
-        }
-        else {
+        } else {
             System.out.println("continue reading rules...");
             startGame();
         }
 
     }
-    private static void setupPlayers(){
-        Prompter prompter =new Prompter(new Scanner(System.in));
-        String setupPlayer1 =prompter.prompt("\u001B[36mPlayer 1\u001B[0m enter your name or leave blank for default");
-        if (setupPlayer1.isEmpty()){
-            player_1 = new Player(board,true);
+
+    private static void setupPlayers() {
+        Prompter prompter = new Prompter(new Scanner(System.in));
+        String setupPlayer1 = prompter.prompt("\u001B[36mPlayer 1\u001B[0m enter your name or leave blank for default");
+        if (setupPlayer1.isEmpty()) {
+            player_1 = new Player(board, true);
+        } else {
+            player_1 = new Player(board, true, setupPlayer1);
         }
-        else {
-            player_1 =new Player(board,true,setupPlayer1);
-        }
-        System.out.println(player_1.toString()+" has been created");
+        System.out.println(player_1.toString() + " has been created");
         String setupPlayer2 = prompter.prompt("\u001B[91mPlayer 2\u001B[0m enter your name or leave blank for default");
-        if (setupPlayer2.isEmpty()){
-            player_2 = new Player(board,true);
+        if (setupPlayer2.isEmpty()) {
+            player_2 = new Player(board, false);
+        } else {
+            player_2 = new Player(board, false, setupPlayer2);
         }
-        else {
-            player_2 =new Player(board,false,setupPlayer2);
-        }
-        System.out.println(player_2.toString()+" has been created");
+        System.out.println(player_2.toString() + " has been created");
     }
 
     private static void drawBoard(CheckerPiece[][] theBoardArray) throws IOException {
@@ -91,7 +140,6 @@ class CheckersGame{
             BufferedReader blueSquare = Files.newBufferedReader(bluePiece);
             BufferedReader emptySquare = Files.newBufferedReader(emptySquarePath);
             BufferedReader filledSquare = Files.newBufferedReader(filledSquarePath);
-
 
 
             //draw entire row four times
@@ -173,7 +221,7 @@ class CheckersGame{
 
         }
         //bottom of board draw bottom from file
-        String bottom =Files.readString(bottomRow);
+        String bottom = Files.readString(bottomRow);
         System.out.println(bottom);
     }
 
