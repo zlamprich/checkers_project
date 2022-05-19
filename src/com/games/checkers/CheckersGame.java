@@ -14,6 +14,7 @@ class CheckersGame {
         List<Point> validStuff2 = gameBoard.checkValidMove(gameBoard.getCheckersArray()[3][1]);
         gameBoard.movePiece(gameBoard.getCheckersArray()[3][1],new Point(2,4));
         List<Point> validStuff3 = gameBoard.checkValidMove(gameBoard.getCheckersArray()[5][3]);
+        gameBoard.movePiece(gameBoard.getCheckersArray()[5][3],new Point(1,3));
 
         System.out.println("hi");
 

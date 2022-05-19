@@ -130,7 +130,7 @@ public class Board {
         boolean solution = false;
 
         //check to make sure pieces at the points are not the same color
-        if (checkersArray[(int) thePointToJumpFrom.getY()][(int) thePointToJumpFrom.getX()].getIsBlack() && !checkersArray[(int) thePointToJumpOver.getY()][(int) thePointToJumpOver.getX()].getIsBlack()) {
+        if (checkersArray[(int) thePointToJumpFrom.getY()][(int) thePointToJumpFrom.getX()].getIsBlack() != checkersArray[(int) thePointToJumpOver.getY()][(int) thePointToJumpOver.getX()].getIsBlack()) {
             int xDirection = (int) thePointToJumpOver.getX() - (int) thePointToJumpFrom.getX();
             int yDirection = (int) thePointToJumpOver.getY() - (int) thePointToJumpFrom.getY();
             //check to make sure the piece after thePointToJumpOver is within bounds and empty
@@ -155,15 +155,15 @@ public class Board {
         if (validMoves.contains(thePoint)) {
             //check if moving is a jump
             if (pointX - currentPieceX == 2 || pointX - currentPieceX == -2) {
-                checkersArray[(currentPieceY+pointY)/2][(currentPieceX+pointX)/2]=null;
+                checkersArray[(currentPieceY + pointY) / 2][(currentPieceX + pointX) / 2] = null;
             }
 
             //move the piece
-            checkersArray[pointY][pointX]=thePiece;
+            checkersArray[pointY][pointX] = thePiece;
             //update piece data
-            thePiece.getPieceLocation().setLocation(pointX,pointY);
+            thePiece.getPieceLocation().setLocation(pointX, pointY);
             //delete old piece
-            checkersArray[currentPieceY][currentPieceX]=null;
+            checkersArray[currentPieceY][currentPieceX] = null;
 
         }
     }
