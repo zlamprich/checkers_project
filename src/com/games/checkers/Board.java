@@ -162,6 +162,8 @@ public class Board {
             checkersArray[pointY][pointX] = thePiece;
             //update piece data
             thePiece.getPieceLocation().setLocation(pointX, pointY);
+            //check king status
+            thePiece.checkKingStatus(checkersArray);
             //delete old piece
             checkersArray[currentPieceY][currentPieceX] = null;
 

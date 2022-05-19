@@ -28,8 +28,8 @@ class CheckersGame {
             playerMove(player_1);
             //p2 move
             playerMove(player_2);
-            if (player_1.thisPlayerLost()) System.out.println(player_2.toString()+" wins!!!");
-            if (player_2.thisPlayerLost()) System.out.println(player_1.toString()+" wins!!!");
+            if (player_1.thisPlayerLost()) System.out.println(player_2.toString() + " wins!!!");
+            if (player_2.thisPlayerLost()) System.out.println(player_1.toString() + " wins!!!");
         }
 
         System.out.println();
@@ -38,7 +38,7 @@ class CheckersGame {
 
     private static void playerMove(Player thePlayer) {
         Prompter prompter = new Prompter(new Scanner(System.in));
-        String chooseCords = prompter.prompt(thePlayer.toString()+" choose py" +
+        String chooseCords = prompter.prompt(thePlayer.toString() + " choose py" +
                 "iece to move.Example row,column...0,0  ", "[0|1|2|3|4|5|6|7],[0|1|2|3|4|5|6|7]", "Invalid Response please enter in the digit form of row,column");
         int xCord = Integer.parseInt(chooseCords.split(",")[0]);
         int yCord = Integer.parseInt(chooseCords.split(",")[1]);
