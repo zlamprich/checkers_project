@@ -54,7 +54,7 @@ public class Board {
 
     // Method to get the x,y coordinates of a particular CheckerPiece object, then return the piece or null if empty.
     public CheckerPiece getLocationValue(int x, int y) {
-        return this.checkersArray[y][x];
+        return this.checkersArray[x][y];
     }
 
     // Method to set a CheckerPiece object's x,y coordinates to the given coordinates.
@@ -162,6 +162,8 @@ public class Board {
             checkersArray[pointY][pointX] = thePiece;
             //update piece data
             thePiece.getPieceLocation().setLocation(pointX, pointY);
+            //check king status
+            thePiece.checkKingStatus(checkersArray);
             //delete old piece
             checkersArray[currentPieceY][currentPieceX] = null;
 

@@ -45,8 +45,8 @@ public class CheckerPiece {
 
 
     //method to CHECK if piece is a King piece after reaching the end of the board. Ran after every move.
-    public void checkKingStatus(Board board) {
-        if (getIsBlack() && pieceCordinates.getY() == board.size - 1 || !getIsBlack() && pieceCordinates.getY() == 0)
+    public void checkKingStatus(CheckerPiece[][] theBoardArray) {
+        if ((getIsBlack() && pieceCordinates.getY() == theBoardArray.length - 1) || (!getIsBlack() && pieceCordinates.getY() == 0))
             this.setAsKing();
     }
 
