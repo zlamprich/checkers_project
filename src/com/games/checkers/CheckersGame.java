@@ -1,7 +1,6 @@
 package com.games.checkers;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 class CheckersGame {
@@ -17,6 +16,9 @@ class CheckersGame {
         gameBoard.movePiece(gameBoard.getCheckersArray()[5][3],new Point(1,3));
 
         System.out.println("hi");
+
+    }
+    public void prompt(){
 
     }
 
