@@ -112,7 +112,7 @@ class CheckersGame {
         if (startGame.equalsIgnoreCase("y")) {
             board = new Board();
             drawBoard(board.getCheckersArray());
-            Console.clear();
+
         } else {
             System.out.println("continue reading rules...");
             startGame();
