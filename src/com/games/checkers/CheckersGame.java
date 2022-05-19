@@ -83,9 +83,9 @@ class CheckersGame {
             String validMoves = prompter.prompt("Enter number choice to move to.", regexCounter, "Invalid choice please choose one of the following digits" + regexCounter);
             board.movePiece(board.getLocationValue(xCord, yCord), availablePoints.get(Integer.valueOf(validMoves)));
             try {
-
-                drawBoard(board.getCheckersArray());
                 Console.clear();
+                drawBoard(board.getCheckersArray());
+
 
 
             } catch (IOException e) {
