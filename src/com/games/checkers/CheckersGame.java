@@ -21,19 +21,8 @@ class CheckersGame {
         gameBoard.movePiece(gameBoard.getCheckersArray()[5][3], new Point(1, 3));
 
         System.out.println("hi");
-        System.out.println("\033[36mThis is cyan\033[0m");
-
-
-        // Creating a path choosing file from local
-        // directory by creating an object of Path class
-        Path fileName
-                = Path.of("src/coms/games/resources/EntireBoardForReferenceOnly");
-
-
-        // Now calling Files.readString() method to
-        // read the file
-        String str = Files.readString(fileName);
-        String str2 = Files.readString(fileName);
+        Player p1 = new Player(gameBoard,true,"Worst Coder");
+        System.out.println(p1.toString());
 
         // Printing the string
         //System.out.print(str);
