@@ -88,7 +88,7 @@ public class Board {
                 if (checkersArray[pieceY + 1][pieceX + 1] != null && validJumpCheckHelper(thePieceToCheck.getPieceLocation(), new Point(pieceX + 1, pieceY + 1))) {
                     validMoves.add(new Point(pieceX + 2, pieceY + 2));
                 }
-                ; //ADD JUMP LOGIC
+
             }
             //check left moves
             if (pieceX - 1 >= 0) {
@@ -96,7 +96,7 @@ public class Board {
                 if (checkersArray[pieceY + 1][pieceX - 1] != null && validJumpCheckHelper(thePieceToCheck.getPieceLocation(), new Point(pieceX - 1, pieceY + 1))) {
                     validMoves.add(new Point(pieceX - 2, pieceY + 2));
                 }
-                ; //ADD JUMP LOGIC
+
             }
 
         }
@@ -109,7 +109,7 @@ public class Board {
                 if (checkersArray[pieceY - 1][pieceX + 1] != null && validJumpCheckHelper(thePieceToCheck.getPieceLocation(), new Point(pieceX + 1, pieceY - 1))) {
                     validMoves.add(new Point(pieceX + 2, pieceY - 2));
                 }
-                ;//ADD JUMP LOGIC
+
             }
             //check left moves
             if (pieceX - 1 >= 0) {

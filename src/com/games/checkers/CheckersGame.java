@@ -1,14 +1,13 @@
 package com.games.checkers;
 
+import com.apps.util.Console;
 import com.apps.util.Prompter;
 
 import java.awt.*;
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -86,6 +85,9 @@ class CheckersGame {
             try {
 
                 drawBoard(board.getCheckersArray());
+                Console.clear();
+
+
             } catch (IOException e) {
                 System.out.println("failed to draw");
                 e.printStackTrace();
@@ -110,6 +112,7 @@ class CheckersGame {
         if (startGame.equalsIgnoreCase("y")) {
             board = new Board();
             drawBoard(board.getCheckersArray());
+            Console.clear();
         } else {
             System.out.println("continue reading rules...");
             startGame();
