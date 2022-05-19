@@ -21,8 +21,9 @@ public class Player {
             setPlayerName("Player 2");
         }
     }
-    Player(Board theBoard, Boolean isBlue,String theName) {
-        this(theBoard,isBlue);
+
+    Player(Board theBoard, Boolean isBlue, String theName) {
+        this(theBoard, isBlue);
         setPlayerName(theName);
     }
 
@@ -66,28 +67,31 @@ public class Player {
         boolean playerLost = false;
         //lose conditions are if player doesnt have pieces left to move or cannot move a piece because blocked
         if (playerPieces.isEmpty()) playerLost = true;
-        boolean aPieceCanMove = false;
-        //iterate over player pieces checking if valid moves available for any of them
-        for (CheckerPiece piece :
-                playerPieces) {
-            if (!board.checkValidMove(piece).isEmpty()) {
-                aPieceCanMove = true;
-                break;
-            }
+        else {
+            boolean aPieceCanMove = false;
+            //iterate over player pieces checking if valid moves available for any of them
+            for (CheckerPiece piece :
+                    playerPieces) {
+                if (!board.checkValidMove(piece).isEmpty()) {
+                    aPieceCanMove = true;
+                    break;
+                }
 
+            }
+            //if iterated thru entire list and cannot move any piece player lost
+            if (!aPieceCanMove) playerLost = true;
         }
-        //if iterated thru entire list and cannot move any piece player lost
-        if (!aPieceCanMove) playerLost = true;
+
 
         return playerLost;
     }
-    public String toString(){
+
+    public String toString() {
         String name;
-        if (isBlue){
-            name="\u001B[36m"+this.PlayerName+"\u001B[0m";
-        }
-        else{
-            name ="\u001B[91m"+this.PlayerName+"\u001B[0m";
+        if (isBlue) {
+            name = "\u001B[36m" + this.PlayerName + "\u001B[0m";
+        } else {
+            name = "\u001B[91m" + this.PlayerName + "\u001B[0m";
         }
         return name;
     }

@@ -23,22 +23,37 @@ class CheckersGame {
         startGame();
         setupPlayers();
         //loop for game checking if either player has lost yet
+        boolean gameOver = false;
         while (player_1.thisPlayerLost() == false && player_2.thisPlayerLost() == false) {
-            //p1 move
-            playerMove(player_1);
-            //p2 move
-            playerMove(player_2);
-            if (player_1.thisPlayerLost()) System.out.println(player_2.toString() + " wins!!!");
-            if (player_2.thisPlayerLost()) System.out.println(player_1.toString() + " wins!!!");
-        }
 
-        System.out.println();
+            //p1 move
+            //check if player has lost before allowing them to move
+            if (player_1.thisPlayerLost() == false && !gameOver) {
+                playerMove(player_1);
+                player_1.updateBoard(board);
+            }
+            //player has lost
+            else {
+                System.out.println(player_2.toString() + " wins!!!");
+                gameOver = true;
+            }
+
+            //p2 move
+
+            if (player_2.thisPlayerLost() == false && !gameOver) {
+                playerMove(player_2);
+                player_2.updateBoard(board);
+            } else {
+                System.out.println(player_1.toString() + " wins!!!");
+                gameOver = true;
+            }
+        }
 
     }
 
     private static void playerMove(Player thePlayer) {
         Prompter prompter = new Prompter(new Scanner(System.in));
-        String chooseCords = prompter.prompt(thePlayer.toString() + " choose py" +
+        String chooseCords = prompter.prompt(thePlayer.toString() + " choose p" +
                 "iece to move.Example row,column...0,0  ", "[0|1|2|3|4|5|6|7],[0|1|2|3|4|5|6|7]", "Invalid Response please enter in the digit form of row,column");
         int xCord = Integer.parseInt(chooseCords.split(",")[0]);
         int yCord = Integer.parseInt(chooseCords.split(",")[1]);
@@ -54,7 +69,7 @@ class CheckersGame {
             if (!availablePoints.isEmpty()) {
                 for (Point point :
                         availablePoints) {
-                    System.out.println(counter + ". row = " + point.getY() + " column =" + point.x);
+                    System.out.println(counter + ". row = " + point.y + " column =" + point.x);
                     regexCounter += counter + "|";
                     counter++;
                 }
@@ -69,6 +84,7 @@ class CheckersGame {
             String validMoves = prompter.prompt("Enter number choice to move to.", regexCounter, "Invalid choice please choose one of the following digits" + regexCounter);
             board.movePiece(board.getLocationValue(xCord, yCord), availablePoints.get(Integer.valueOf(validMoves)));
             try {
+
                 drawBoard(board.getCheckersArray());
             } catch (IOException e) {
                 System.out.println("failed to draw");
